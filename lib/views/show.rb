@@ -7,7 +7,7 @@ class Show
 		while i <= 2
 			while j <= 2
 				print " | "
-				print game.game_board.game_board[i][j]
+				print game.game_board.game_board[i][j].show
 				j += 1
 			end
 			j = 0

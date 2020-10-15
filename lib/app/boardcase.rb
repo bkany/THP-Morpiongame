@@ -18,4 +18,8 @@ class Boardcase
 		@content = camp
 	end
 	
+	def show
+		print @content
+	end
+	
 end

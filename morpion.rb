@@ -12,3 +12,4 @@ require 'views/application.rb'
 #############################################################
 
 my_game = Application.new.create_game()
+Show.new.show_board(my_game)
