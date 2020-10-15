@@ -82,24 +82,51 @@ class Application
 		return answer
 	end
 	
-	# ----------------------------- DEROULEMENT DU JEU -----------------------------------------
+
+# ----------------------------- CONDITION DE FIN DE JEU -----------------------------------------
+	def end_of_game
+		if @current_game.game_board.is_full?() == true
+			puts "La partie est terminée, personne n'a gagné !"
+		end
+		if @current_game.game_board.is_victorious?() == true
+			puts "La partie est terminée ! Bravo au gagnant !"
+		end
+	end
+
+# ----------------------------- DEROULEMENT DU JEU -----------------------------------------
 	
 	def launch_game
 		@current_game.players[0].show
 		@current_game.players[1].show
 
 		while (@current_game.game_board.is_full?() == false || @current_game.game_board.is_victorious?() == false)
-		
-			#player_turn = @current_game.players.find{ |x| x.turn_to_play == 1} 
-		
-			puts "Tour du Joueur 1 #{@current_game.players[0].name}"
-			@current_game.change_case(self.he_merde_bad_case_to_play(), @current_game.players[0])
-			Show.new.show_board(@current_game)
-			puts "Tour du Joueur 2 #{@current_game.players[1].name}"
-			@current_game.change_case(self.he_merde_bad_case_to_play(), @current_game.players[1])
+			
+			# Ce IF détermine à quel joueur c'est de jouer
+			if (@current_game.players[0].turn_to_play == 1)
+				player_turn = @current_game.players[0]
+				index = 0
+			else
+				player_turn = @current_game.players[1]
+				index = 1
+			end
+			
+			puts "---- Tour du Joueur #{player_turn.name} ----"
+			@current_game.change_case(self.he_merde_bad_case_to_play(), player_turn)
 			Show.new.show_board(@current_game)
 			
+			# On inverse les rôles et le joueur qui n'a pas encore joué devient celui qui jouera au tour suivant
+			if index == 0
+				@current_game.players[0].must_play(0)
+				@current_game.players[1].must_play(1)
+			else 
+				@current_game.players[0].must_play(1)
+				@current_game.players[1].must_play(0)
+			end
+			
 		end
+		
+	self.end_of_game()
+			
 	end
 	
 end

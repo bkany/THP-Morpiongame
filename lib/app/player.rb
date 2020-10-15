@@ -20,8 +20,8 @@ class Player
 	end
 	
 	# Lorsque l'adversaire a joué une case, c'est au tour du joueur de jouer
-	def must_play()
-		@turn_to_play = 1
+	def must_play(value)
+		@turn_to_play = value
 	end
 	
 end
