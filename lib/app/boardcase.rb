@@ -5,7 +5,7 @@ class Boardcase
 	
 	def initialize()
 		@status = 0
-		@content = " "
+		@content = "x"
 	end
 	
 	def is_empty?
@@ -20,6 +20,20 @@ class Boardcase
 	
 	def show
 		print @content
+	end
+	
+	def is_eq(boardcase)
+		if @status == 1 && boardcase.status == 1 && @content == boardcase.content
+			return true
+		end
+		return false
+	end
+	
+	def is_eq_3(boardcase1, boardcase2)
+		if self.is_eq(boardcase1) && self.is_eq(boardcase2) && boardcase1.is_eq(boardcase2)
+			return true
+		end
+		return false
 	end
 	
 end

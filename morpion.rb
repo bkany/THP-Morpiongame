@@ -11,5 +11,8 @@ require 'views/application.rb'
 
 #############################################################
 
-my_game = Application.new.create_game()
-Show.new.show_board(my_game)
+app = Application.new
+Show.new.show_board(app.current_game)
+app.current_game.change_case(app.case_to_play(app.ask_case_to_play()), "x")
+Show.new.show_board(app.current_game)
+puts app.current_game.game_board.is_victorious?()

@@ -1,5 +1,8 @@
 class Application 
 
+	# Variable d'instance qui contient le jeu en cours
+	attr_accessor :current_game
+
 # ------------------------------ INITIALISATION DU JEU -------------------------------
 	# Cette méthode demande le nom du joueur. 
 	def ask_name(rank)
@@ -17,13 +20,13 @@ class Application
 		return players
 	end
 	
-	def create_game()
+	def initialize()
 		players = self.create_players()
-		new_game = Game.new(players)
-		return new_game
+		@current_game = Game.new(players)
 	end
 
 # ---------------------------------- JEU -------------------------------------------
+	# Cette méthode demande au joueur quelle case il veut jouer et retourne sa réponse entrée au clavier
 	def ask_case_to_play()
 		puts "Quelle case voulez-vous jouer ?"
 		print "> "
@@ -54,11 +57,15 @@ class Application
 	
 	# Cette méthode demande au joueur de rentrer correctement la case à jouer, et la transforme en une vraie case [i, j] (et non pas A1, B2 ou C3)
 	def case_to_play(answer)
-		while !((answer[0] == "A" || answer[0] == "B" || answer[0] == "C") && (answer[1] == 1 || answer[1] == 2 || answer[1] == 3))
+		while !((answer[0] == "A" || answer[0] == "B" || answer[0] == "C") && (answer[1] == "1" || answer[1] == "2" || answer[1] == "3"))
 			puts "Votre réponse est incorrecte. Reprenez-vous cher ami."
 			answer = self.ask_case_to_play
 		end
-		return translate_answer(answer)
+		return self.translate_answer(answer)
 	end
+	
+	# ----------------------------- DEROULEMENT DU JEU -----------------------------------------
+	
+#
 	
 end

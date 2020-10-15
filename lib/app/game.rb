@@ -14,7 +14,7 @@ class Game
 	end
 	
 	def change_case(board_case, camp)
-		@game_board[board_case[0], board_case[1]].change_content(camp)
+		@game_board.game_board[board_case[0]][board_case[1]].change_content(camp)
 	end
 	
 	
