@@ -5,7 +5,7 @@ class Boardcase
 	
 	def initialize()
 		@status = 0
-		@content = "x"
+		@content = " "
 	end
 	
 	def is_empty?

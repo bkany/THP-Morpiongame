@@ -66,6 +66,10 @@ class Application
 	
 	# ----------------------------- DEROULEMENT DU JEU -----------------------------------------
 	
-#
+	def game_tour
+		while (@current_game.game_board.is_full() == false || @current_game.game_board.is_victorious?() == true || i == 10)
+			@current_game.change_case(self.case_to_play(self.ask_case_to_play()), @current_game.players[0].camp)
+		end
+	end
 	
 end
