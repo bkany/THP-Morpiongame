@@ -14,5 +14,4 @@ require 'views/application.rb'
 app = Application.new()
 Show.new.show_board(app.current_game)
 app.launch_game()
-		
 puts #fin de partie"

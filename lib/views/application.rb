@@ -28,7 +28,7 @@ class Application
 # ---------------------------------- JEU -------------------------------------------
 	# Cette méthode demande au joueur quelle case il veut jouer et retourne sa réponse entrée au clavier
 	def ask_case_to_play()
-		puts "Quelle case voulez-vous jouer ?"
+		puts "Quelle case voulez-vous jouer ? Vous devez écrire une case sous la forme A1, C2, B3, etc."
 		print "> "
 		return gets.chomp
 	end
@@ -58,7 +58,7 @@ class Application
 	# Cette méthode demande au joueur de rentrer correctement la case à jouer, et la transforme en une vraie case [i, j] (et non pas A1, B2 ou C3)
 	def case_to_play(answer)
 		while !((answer[0] == "A" || answer[0] == "B" || answer[0] == "C") && (answer[1] == "1" || answer[1] == "2" || answer[1] == "3"))
-			puts "Votre réponse est incorrecte. Reprenez-vous cher ami."
+			puts "Votre réponse est incorrecte. Reprenez-vous cher ami. Votre réponse doit être sous la forme A1, C3 ..."
 			answer = self.ask_case_to_play
 		end
 		return self.translate_answer(answer)
@@ -76,7 +76,7 @@ class Application
 	def he_merde_bad_case_to_play()
 		answer = self.case_to_play(self.ask_case_to_play())
 		while self.is_case_to_play_ok(answer) == false
-			puts "La case demandée est déjà remplie. Essayer une autre case"
+			puts "La case demandée est déjà remplie. Essayer une autre case."
 			answer = self.case_to_play(self.ask_case_to_play())
 		end
 		return answer
@@ -99,7 +99,10 @@ class Application
 		@current_game.players[0].show
 		@current_game.players[1].show
 
-		while (@current_game.game_board.is_full?() == false || @current_game.game_board.is_victorious?() == false)
+		# Les joueurs continuent de jouer tant que 
+		# - La grille n'est pas totalement remplie
+		# - L'un des deux joueurs n'a pas gagné
+		while (@current_game.game_board.is_full?() == false) && (@current_game.game_board.is_victorious?() == false)
 			
 			# Ce IF détermine à quel joueur c'est de jouer
 			if (@current_game.players[0].turn_to_play == 1)
@@ -122,7 +125,7 @@ class Application
 				@current_game.players[0].must_play(1)
 				@current_game.players[1].must_play(0)
 			end
-			
+						
 		end
 		
 	self.end_of_game()
