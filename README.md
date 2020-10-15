@@ -37,3 +37,9 @@ La classe __Game__ contient l'ensemble des variables d'instance permettant de jo
 - *game_board* est de type Board contenant la grille de jeu.
 - *nb_games* est un Integer qui compte le nombre de parties jouées. 
 
+## Algorithme de jeu
+Après l'initialisation d'un __Game__ (2 joueurs, 1 grille), l'algorithme va demander aux joueurs quelle case ils souhaitent jouer, sous la forme A1, A2, A3 (première ligne, B1, B2, B3 (deuxième ligne) ou C1, C2, C3 (troisième ligne). Une case ne pourra être jouée que si son status == 0. 
+A chaque coup d'un joueur, sa variable __turn_to_play__ est modifiée. La variable de l'adversaire également. 
+Tant que la grille n'est pas pleine (méthode *is_full?()*) OU que la grille n'est pas victorieuse (méthode *is_victorious?()*), le joueur à qui c'est le tour doit jouer. 
+La partie se termine lorsque l'une des deux conditions est validée. 
+Si les joueurs veulent recommencer, une nouvelle grille pourra être appelée avec la méthode *recharge_board*.

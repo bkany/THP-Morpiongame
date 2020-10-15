@@ -10,12 +10,18 @@ class Player
 	
 	#Affichage d'un joueur
 	def show
-		puts "Le joueur #{@name} joue avec les #{@camp}"
+		puts "Le joueur #{@name} joue avec les -#{@camp}-"
 	end
 	
 	# Lorsque le joueur joue une case dans le board, il change la case "case_to_play" et y met son "x" ou son "o"
 	def plays(game_board, case_to_play)
 		game_board.change_case(case_to_play, @camp)
+		@turn_to_play = 0
+	end
+	
+	# Lorsque l'adversaire a joué une case, c'est au tour du joueur de jouer
+	def must_play()
+		@turn_to_play = 1
 	end
 	
 end

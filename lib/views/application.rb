@@ -64,11 +64,41 @@ class Application
 		return self.translate_answer(answer)
 	end
 	
+	# Cette méthode vérifie que la case demandée n'est pas déjà occupée par un -x- ou un -o-
+	def is_case_to_play_ok(answer)
+		if @current_game.game_board.game_board[answer[0]][answer[1]].status == 1
+			return false
+		else
+			return true
+		end
+	end
+	
+	def he_merde_bad_case_to_play()
+		answer = self.case_to_play(self.ask_case_to_play())
+		while self.is_case_to_play_ok(answer) == false
+			puts "La case demandée est déjà remplie. Essayer une autre case"
+			answer = self.case_to_play(self.ask_case_to_play())
+		end
+		return answer
+	end
+	
 	# ----------------------------- DEROULEMENT DU JEU -----------------------------------------
 	
-	def game_tour
-		while (@current_game.game_board.is_full() == false || @current_game.game_board.is_victorious?() == true || i == 10)
-			@current_game.change_case(self.case_to_play(self.ask_case_to_play()), @current_game.players[0].camp)
+	def launch_game
+		@current_game.players[0].show
+		@current_game.players[1].show
+
+		while (@current_game.game_board.is_full?() == false || @current_game.game_board.is_victorious?() == false)
+		
+			#player_turn = @current_game.players.find{ |x| x.turn_to_play == 1} 
+		
+			puts "Tour du Joueur 1 #{@current_game.players[0].name}"
+			@current_game.change_case(self.he_merde_bad_case_to_play(), @current_game.players[0])
+			Show.new.show_board(@current_game)
+			puts "Tour du Joueur 2 #{@current_game.players[1].name}"
+			@current_game.change_case(self.he_merde_bad_case_to_play(), @current_game.players[1])
+			Show.new.show_board(@current_game)
+			
 		end
 	end
 	
